@@ -27,15 +27,11 @@ public class PurpleDotMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 mousePos = Input.mousePosition;
-        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePos);
         x = Random.Range(min, max);
         y = Random.Range(min, max);
         z = 0;
         newpos = new Vector3(x, y, z);
 
-        Debug.Log(newpos);
-
-        transform.position = Vector3.SmoothDamp(transform.position, newpos, ref velocity, smoothTime);
+        transform.localPosition = Vector3.SmoothDamp(transform.localPosition, newpos, ref velocity, smoothTime);
     }
 }

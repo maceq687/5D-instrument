@@ -178,7 +178,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 495c9e2a934bcc640a8d7427b13cb680, type: 3}
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 24
     m_FontStyle: 0
     m_BestFit: 0
@@ -621,7 +621,6 @@ GameObject:
   m_Component:
   - component: {fileID: 576334922}
   - component: {fileID: 576334921}
-  - component: {fileID: 576334920}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -629,14 +628,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &576334920
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 576334919}
-  m_Enabled: 1
 --- !u!20 &576334921
 Camera:
   m_ObjectHideFlags: 0
