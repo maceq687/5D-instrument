@@ -8,16 +8,24 @@ public class blob : MonoBehaviour
     Vector3 worldPosition;
     public Transform ObjectToMove;
     bool PlayerPresent = false;
+    public float planeDistance = 4;
+    public float yCamRot;
+    float absolutePlaneDistance;
 
     void Start()
     {
         InvokeRepeating("CalculateNewPos", 0.1f, 0.1f);
+        float zCam = Camera.main.transform.position.z;
+        absolutePlaneDistance = zCam + planeDistance;
+        Quaternion camRotation = Camera.main.transform.rotation;
+        yCamRot = Camera.main.transform.rotation.y;
+        ObjectToMove.rotation = camRotation;
     }
 
     void Update()
     {
         Vector3 mousePos = Input.mousePosition;
-        mousePos.z = 1f;
+        mousePos.z = planeDistance;
         worldPosition = Camera.main.ScreenToWorldPoint(mousePos);
         MoveObject();
         if (Input.GetMouseButtonDown(0)){
@@ -26,14 +34,11 @@ public class blob : MonoBehaviour
     }
 
     void CalculateNewPos() {
-            Vector3 minPosition = Camera.main.ScreenToWorldPoint(Vector3.forward);
-            Vector3 resolution = new Vector3(Screen.width, Screen.height, 1);
+            Vector3 refZero = new Vector3(0, 0, planeDistance);
+            Vector3 minPosition = Camera.main.ScreenToWorldPoint(refZero);
+            Vector3 resolution = new Vector3(Screen.width, Screen.height, planeDistance);
             Vector3 maxPosition = Camera.main.ScreenToWorldPoint(resolution);
-            float xMin = minPosition.x;
-            float xMax = maxPosition.x;
-            float yMin = minPosition.y;
-            float yMax = maxPosition.y;
-            rndPosition.Set(Random.Range(xMin, xMax), Random.Range(yMin, yMax), -9);
+            rndPosition.Set(Random.Range(minPosition.x, maxPosition.x), Random.Range(minPosition.y, maxPosition.y), absolutePlaneDistance);
         }
 
     void MoveObject() {
