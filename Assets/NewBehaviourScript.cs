@@ -21,6 +21,12 @@ public class NewBehaviourScript : MonoBehaviour {
     [DllImport("__Internal")]
     private static extern void PlayKick();
 
+    [DllImport("__Internal")]
+    private static extern void DistortionCurve();
+
+    [DllImport("__Internal")]
+    private static extern void ValueLimit();
+
     void Start() {
         #if UNITY_WEBGL && !UNITY_EDITOR
         SetVariables();
