@@ -890,6 +890,10 @@ MonoBehaviour:
   Button: {fileID: 115498498}
   SceneCamera: {fileID: 1211615063}
   PlayerPosOne: 1
+  PlayerPosTwo: 1
+  PlayerPosThree: 1
+  PlayerPosFour: 1
+  PlayerPosFive: 1
 --- !u!4 &599618133
 Transform:
   m_ObjectHideFlags: 0
@@ -1806,6 +1810,49 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1426935845
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1426935847}
+  - component: {fileID: 1426935846}
+  m_Layer: 0
+  m_Name: GetVariables
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1426935846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426935845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc61576518d5b70439c52476e900bb75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1426935847
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426935845}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 18.758356, y: 220.38362, z: -12.72188}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1683707990
 GameObject:
   m_ObjectHideFlags: 0
