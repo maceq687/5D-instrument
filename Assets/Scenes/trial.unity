@@ -413,6 +413,7 @@ GameObject:
   - component: {fileID: 51221946}
   - component: {fileID: 51221951}
   - component: {fileID: 51221950}
+  - component: {fileID: 51221952}
   m_Layer: 0
   m_Name: BotBlue
   m_TagString: Untagged
@@ -554,6 +555,20 @@ MonoBehaviour:
   min: -350
   max: 350
   smoothTime: 2
+--- !u!114 &51221952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51221944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4033337cf2d8ae54c99cf36efaf072b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  XBlue: 0
+  YBlue: 0
 --- !u!1 &115498498
 GameObject:
   m_ObjectHideFlags: 0
@@ -888,11 +903,6 @@ MonoBehaviour:
     type: 3}
   Button: {fileID: 115498498}
   SceneCamera: {fileID: 1211615063}
-  PlayerPosOne: 1
-  PlayerPosTwo: 1
-  PlayerPosThree: 1
-  PlayerPosFour: 1
-  PlayerPosFive: 1
 --- !u!4 &599618133
 Transform:
   m_ObjectHideFlags: 0
