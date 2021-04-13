@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementManager : MonoBehaviour
+public class MovementManagerPurple : MonoBehaviour
 {
-  public DotMovement ascript;
+  public PurpleDotMove ascript;
   public FollowMouseBlue bscript;
 
   //public GameObject GameManager;
   //private GameManager bool_script;
   
   void Start () {
-      ascript = GetComponent<DotMovement> ();
+      ascript = GetComponent<PurpleDotMove> ();
       bscript = GetComponent<FollowMouseBlue> ();
       ascript.enabled = true;
       bscript.enabled = false;
@@ -23,18 +23,19 @@ public class MovementManager : MonoBehaviour
   void Update () 
   {
       //bool_script.PlayerPosOne == false
-      if (Input.GetKeyDown (KeyCode.Space)) 
+      //Input.GetKeyDown (KeyCode.A)
+      if (PhotonNetwork.countOfPlayers == 2) 
       {
          if(ascript.enabled == true)
          {
            ascript.enabled = false;
            bscript.enabled = true;
          }
-         else
-         {
-           ascript.enabled = true;
-           bscript.enabled = false;
-         }
+        //  else
+        //  {
+        //    ascript.enabled = true;
+        //    bscript.enabled = false;
+        //  }
       }
   }
 }
