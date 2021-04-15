@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Runtime.InteropServices;
 
-public class NewBehaviourScript : MonoBehaviour {
+public class AudioControl : MonoBehaviour {
 
     [DllImport("__Internal")]
     private static extern void SetVariables();
@@ -20,6 +20,12 @@ public class NewBehaviourScript : MonoBehaviour {
 
     [DllImport("__Internal")]
     private static extern void PlayKick();
+
+    [DllImport("__Internal")]
+    private static extern void DistortionCurve();
+
+    [DllImport("__Internal")]
+    private static extern void ValueLimit();
 
     void Start() {
         #if UNITY_WEBGL && !UNITY_EDITOR
