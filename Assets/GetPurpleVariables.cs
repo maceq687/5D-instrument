@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GetBlueVariables : MonoBehaviour
+public class GetPurpleVariables : MonoBehaviour
 {
-    public float XBlue;
-    public float YBlue;
+    public float XPurple;
+    public float YPurple;
     bool xWithin = false;
     bool yWithin = false;
     bool dotWithinC = false;
@@ -39,14 +39,12 @@ public class GetBlueVariables : MonoBehaviour
 
         if (dotXDelta != 0 && dotWithinC == true)
             {
-                // Debug.Log("dotX: " + dotX);
-                XBlue = dotX;
+                XPurple = dotX;
             }
         
         if (dotYDelta != 0 && dotWithinC == true)
             {   
-                // Debug.Log("dotY: " + dotY);
-                YBlue = dotY;
+                YPurple = dotY;
             }
 
         lastDotX = dotX;

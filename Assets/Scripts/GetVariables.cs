@@ -5,19 +5,29 @@ using System.Runtime.InteropServices;
 
 public class GetVariables : MonoBehaviour
 {
-    float xBlueOld;
-    float yBlueOld;
-
     [DllImport("__Internal")]
     private static extern void SetParamA(float paramA);
 
     [DllImport("__Internal")]
     private static extern void SetParamB(float paramB);
 
+    [DllImport("__Internal")]
+    private static extern void SetParamC(float paramC);
+
+    [DllImport("__Internal")]
+    private static extern void SetParamD(float paramD);
+
+    float xBlueOld;
+    float yBlueOld;
+    float xPurpleOld;
+    float yPurpleOld;
+
     void Update()
     {
         float xBlue = GameObject.Find("BotBlue").GetComponent<GetBlueVariables>().XBlue;
         float yBlue = GameObject.Find("BotBlue").GetComponent<GetBlueVariables>().YBlue;
+        float xPurple = GameObject.Find("BotPurple").GetComponent<GetPurpleVariables>().XPurple;
+        float yPurple = GameObject.Find("BotPurple").GetComponent<GetPurpleVariables>().YPurple;
 
         if (xBlue != xBlueOld) {
             #if UNITY_WEBGL && !UNITY_EDITOR
@@ -32,7 +42,21 @@ public class GetVariables : MonoBehaviour
             #endif
             // Debug.Log("yBlue: " + yBlue);
         }
+        if (xPurple != xPurpleOld) {
+            #if UNITY_WEBGL && !UNITY_EDITOR
+            SetParamC(xPurple);
+            #endif
+        }
+
+        if (yPurple != yPurpleOld) {
+            #if UNITY_WEBGL && !UNITY_EDITOR
+            SetParamD(yPurple);
+            #endif
+        }
+
         xBlueOld = xBlue;
         yBlueOld = yBlue;
+        xPurpleOld = xPurple;
+        yPurpleOld = yPurple;
     }
 }
