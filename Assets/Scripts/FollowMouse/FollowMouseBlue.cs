@@ -11,12 +11,6 @@ public class FollowMouseBlue : MonoBehaviour
 
     private Vector3 newpos;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {

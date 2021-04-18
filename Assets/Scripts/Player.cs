@@ -34,7 +34,7 @@ public class Player : Photon.MonoBehaviour
 
     private void CheckInput()
     {
-        bool ActivePlayer = true;
+        //bool ActivePlayer = true;
         // var move = new Vector3(Input.GetAxisRaw("Horizontal"), 0);
         // transform.position += move * MoveSpeed * Time.deltaTime;
 

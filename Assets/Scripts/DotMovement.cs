@@ -13,7 +13,7 @@ public class DotMovement : MonoBehaviour
     private float x;
     private float y;
     private float z;
-    private bool downPressed = false ;
+    //private bool downPressed = false ;
 
     private Vector3 newpos;
 

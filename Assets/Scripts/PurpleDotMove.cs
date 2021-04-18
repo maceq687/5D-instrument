@@ -13,16 +13,10 @@ public class PurpleDotMove : MonoBehaviour
     private float x;
     private float y;
     private float z;
-    private bool downPressed = false ;
+    //private bool downPressed = false ;
 
     private Vector3 newpos;
-    private Vector3 StartPos;
-
-
-    void Start()
-    { 
-               
-    }
+    //private Vector3 StartPos;
 
     // Update is called once per frame
     void Update()

@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class MovementManager : MonoBehaviour
 {
-  public DotMovement ascript;
+  public SynchTest ascript;
   public FollowMouseBlue bscript;
 
   //public GameObject GameManager;
   //private GameManager bool_script;
   
   void Start () {
-      ascript = GetComponent<DotMovement> ();
+      ascript = GetComponent<SynchTest> ();
       bscript = GetComponent<FollowMouseBlue> ();
       ascript.enabled = true;
       bscript.enabled = false;
