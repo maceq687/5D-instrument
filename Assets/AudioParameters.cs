@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.InteropServices;
 
-public class CameraScript : MonoBehaviour
+public class AudioParameters : MonoBehaviour
 {    
     float mouseX;
     float mouseY;

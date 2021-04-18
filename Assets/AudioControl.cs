@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Runtime.InteropServices;
 
-public class NewBehaviourScript : MonoBehaviour {
+public class AudioControl : MonoBehaviour {
 
     [DllImport("__Internal")]
     private static extern void SetVariables();
