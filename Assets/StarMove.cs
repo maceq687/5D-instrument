@@ -2,14 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Runtime.InteropServices;
 
 public class StarMove : MonoBehaviour
 {
+    [DllImport("__Internal")]
+    private static extern void ControlVideoStream(string name);
+    
     void Start()
     {
         // string test = "{\"xHand\":1,\"yHand\":0}";
         // Debug.Log(test);
         // Move(test);
+    }
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+            {
+                string objectName = gameObject.name;
+                // Debug.Log("CV stream switch for " + objectName);
+                #if UNITY_WEBGL && !UNITY_EDITOR
+                ControlVideoStream(objectName);
+                #endif
+            }
     }
 
     public void Move(string args)

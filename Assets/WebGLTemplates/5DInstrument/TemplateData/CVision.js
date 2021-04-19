@@ -16,22 +16,32 @@ const video = document.querySelector('#video');
 const canvas = document.querySelector('#canvas');
 const context = canvas.getContext('2d');
 
-let model; 
+let model;
+var streaming = false;
 
-handTrack.startVideo(video).then(status => {
-    if(status){
-        navigator.getUserMedia(
-            { video:{} },
-            stream => {
-                video.srcObject = stream;
-                setInterval(runDetection, 10);
-            },
-            err =>console.log(err)
-        );
+function ControlStream(name) {
+    streaming = !streaming
+
+    if (streaming === true) {
+        handTrack.startVideo(video).then(status => {
+            if(status){
+                navigator.getUserMedia(
+                    { video:{} },
+                    stream => {
+                        video.srcObject = stream;
+                        trigger = setInterval(runDetection, 10, name);
+                    },
+                    err =>console.log(err)
+                );
+            }
+        });
+    } else {
+        clearInterval(trigger);
+        handTrack.stopVideo(video)
     }
-});
+}
 
-function runDetection(){
+function runDetection(objName){
     model.detect(video).then(predictions => {
         model.renderPredictions(predictions, canvas, context, video);
         // console.log(predictions);
@@ -42,7 +52,8 @@ function runDetection(){
             yPrmtr = yPrmtr / 480; // wideo height
             var obj = {"xHand": xPrmtr, "yHand": yPrmtr};
             // console.log(obj);
-            unityInstance.SendMessage('Star', 'Move', JSON.stringify(obj))
+            // console.log(objName);
+            unityInstance.SendMessage(objName, 'Move', JSON.stringify(obj))
         }
     });
 }
