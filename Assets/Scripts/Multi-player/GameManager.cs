@@ -30,16 +30,39 @@ public class GameManager : MonoBehaviour
     }
     public void SpawnPlayer()
     {
-        //PhotonNetwork.automaticallySyncScene = true;
+        PhotonNetwork.automaticallySyncScene = true;
         // Debug.Log( SeatsPosition.Peek());
         // Debug.Log( SeatsRotation.Peek());
 
         PhotonNetwork.Instantiate(PlayerPrefab.name, SeatsPosition.Peek(), SeatsRotation.Peek(), 0);
+
+        string PlayerId = PhotonNetwork.AuthValues.UserId;
+        //Debug.Log(PlayerId);
+
         SeatsPosition.Pop();
         SeatsRotation.Pop();
 
         Button.SetActive(false);
         SceneCamera.SetActive(false);
+
+    }
+
+    public void Update(){
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PhotonNetwork.DestroyPlayerObjects(PhotonNetwork.player);
+            PhotonNetwork.LeaveRoom();
+            //PhotonNetwork.LoadLevel(0);
+
+            //SeatsPosition.Push();
+            //SeatsRotation.Push();
+        }
+    }
+
+    public void leaveRoom()
+    {
+     Debug.Log("IMOUTBITCHEZ");
     }
 }
  

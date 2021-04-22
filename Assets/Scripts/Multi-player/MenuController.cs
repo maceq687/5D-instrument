@@ -53,14 +53,17 @@ public class MenuController : MonoBehaviour
     public void CreateGame()
     {
         //PhotonNetwork.CreateRoom(CreateGameInput.text, new RoomOptions() { maxPlayers = 5 }, null);
-        PhotonNetwork.CreateRoom("basic", new RoomOptions() { MaxPlayers = 5, PublishUserId = true }, null);
+        PhotonNetwork.CreateRoom("basic", new RoomOptions() { MaxPlayers = 5, PublishUserId = true}, null);
+        
     }
+
 
     public void JoinGame()
     {
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = 5;
         roomOptions.PublishUserId = true;
+        //Debug.Log(PhotonPlayer.UserId);
         //PhotonNetwork.JoinOrCreateRoom(JoinGameInput.text, roomOptions, TypedLobby.Default);
         PhotonNetwork.JoinOrCreateRoom("basic", roomOptions, TypedLobby.Default);
     }
@@ -68,6 +71,9 @@ public class MenuController : MonoBehaviour
     private void OnJoinedRoom()
     {
         PhotonNetwork.LoadLevel("trial");
+        string test = PhotonNetwork.AuthValues.UserId;
+        Debug.Log(test);
+        Debug.Log("test");
     }
 
 }
