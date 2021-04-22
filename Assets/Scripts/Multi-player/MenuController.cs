@@ -53,13 +53,14 @@ public class MenuController : MonoBehaviour
     public void CreateGame()
     {
         //PhotonNetwork.CreateRoom(CreateGameInput.text, new RoomOptions() { maxPlayers = 5 }, null);
-        PhotonNetwork.CreateRoom("basic", new RoomOptions() { MaxPlayers = 5 }, null);
+        PhotonNetwork.CreateRoom("basic", new RoomOptions() { MaxPlayers = 5, PublishUserId = true }, null);
     }
 
     public void JoinGame()
     {
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = 5;
+        roomOptions.PublishUserId = true;
         //PhotonNetwork.JoinOrCreateRoom(JoinGameInput.text, roomOptions, TypedLobby.Default);
         PhotonNetwork.JoinOrCreateRoom("basic", roomOptions, TypedLobby.Default);
     }

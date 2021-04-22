@@ -9,65 +9,37 @@ public class GameManager : MonoBehaviour
     public GameObject Button;
     public GameObject SceneCamera;
 
-    // public bool PlayerPosOne = true;
-    // public bool PlayerPosTwo = true;
-    // public bool PlayerPosThree = true;
-    // public bool PlayerPosFour = true;
-    // public bool PlayerPosFive = true;      
+    public static Stack<Vector3> SeatsPosition = new Stack<Vector3>();
+    public static Stack<Quaternion> SeatsRotation = new Stack<Quaternion>();
 
     private void Awake()
     {
+        SeatsPosition.Push(new Vector3( -116, 0, 355)); //0
+        SeatsPosition.Push(new Vector3( 116, 0, 355)); //1
+        SeatsPosition.Push(new Vector3( -185, 0, 130)); //2
+        SeatsPosition.Push(new Vector3( 185, 0, 130)); //3
+        SeatsPosition.Push(new Vector3(0, 0, 0)); //4
+
+        SeatsRotation.Push(Quaternion.Euler(0, 144, 0)); //0
+        SeatsRotation.Push(Quaternion.Euler(0, -144, 0)); //1
+        SeatsRotation.Push(Quaternion.Euler(0, 73, 0)); //2
+        SeatsRotation.Push(Quaternion.Euler(0, -73, 0)); //3
+        SeatsRotation.Push(Quaternion.identity); //4
         
         Button.SetActive(true);
     }
-
     public void SpawnPlayer()
     {
-        PhotonNetwork.automaticallySyncScene = true;
+        //PhotonNetwork.automaticallySyncScene = true;
+        // Debug.Log( SeatsPosition.Peek());
+        // Debug.Log( SeatsRotation.Peek());
 
-        //PlayerPosOne == true
+        PhotonNetwork.Instantiate(PlayerPrefab.name, SeatsPosition.Peek(), SeatsRotation.Peek(), 0);
+        SeatsPosition.Pop();
+        SeatsRotation.Pop();
 
-        if (PhotonNetwork.countOfPlayers == 1)
-        {
-            PhotonNetwork.Instantiate(PlayerPrefab.name, new Vector2(0, 0), Quaternion.identity, 0);
-            //PlayerPosOne = false;
-            Button.SetActive(false);
-            SceneCamera.SetActive(false);
-        }
-
-        // PlayerPosOne == false && PlayerPosTwo == true
-        else if (PhotonNetwork.countOfPlayers == 2)
-        {
-            PhotonNetwork.Instantiate(PlayerPrefab.name, new Vector3( 185, 0, 130), Quaternion.Euler(0, -73, 0), 0);
-            Button.SetActive(false);
-            //PlayerPosTwo = false;
-            SceneCamera.SetActive(false);
-        }
-
-        //PlayerPosTwo == false && PlayerPosThree == true
-        else if (PhotonNetwork.countOfPlayers == 3)
-        {
-            PhotonNetwork.Instantiate(PlayerPrefab.name, new Vector3( -185, 0, 130), Quaternion.Euler(0, 73, 0), 0);
-            //PlayerPosThree = false;
-            Button.SetActive(false);
-            //SceneCamera.SetActive(false);
-        }
-
-        //PlayerPosThree == false && PlayerPosFour == true
-        else if (PhotonNetwork.countOfPlayers == 4)
-        {
-            PhotonNetwork.Instantiate(PlayerPrefab.name, new Vector3( 116, 0, 355), Quaternion.Euler(0, 37, 0), 0);
-           // PlayerPosFour = false;
-            Button.SetActive(false);
-            //SceneCamera.SetActive(false);
-        }
-
-        else {
-            PhotonNetwork.Instantiate(PlayerPrefab.name, new Vector3( -116, 0, 355), Quaternion.Euler(0, -37, 0), 0);
-            //PlayerPosFive = false;
-            Button.SetActive(false);
-            //SceneCamera.SetActive(false);
-        }
+        Button.SetActive(false);
+        SceneCamera.SetActive(false);
     }
 }
  
