@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class MovementManager : MonoBehaviour
 {
-  public SynchTest ascript;
-  public FollowMouseBlue bscript;
+  public DotMovement ascript;
+  //public FollowMouseBlue bscript;
+  public FollowCV bscript;
 
   //public GameObject GameManager;
   //private GameManager bool_script;
   
   void Start () {
-      ascript = GetComponent<SynchTest> ();
-      bscript = GetComponent<FollowMouseBlue> ();
-      ascript.enabled = true;
-      bscript.enabled = false;
+      ascript = GetComponent<DotMovement> ();
+      //bscript = GetComponent<FollowMouseBlue> ();
+      bscript = GetComponent<FollowCV> ();
+      ascript.enabled = false;
+      bscript.enabled = true;
 
       //bool_script = GameManager.GetComponent<PlayerPosOne>();
 

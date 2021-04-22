@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FollowMouseBlue : MonoBehaviour
+public class FollowMouse : MonoBehaviour
 {
 
     private float x;

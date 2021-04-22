@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class MovementManagerPurple : MonoBehaviour
 {
-  public SynchTest ascript;
-  public FollowMouseBlue bscript;
+  public PurpleDotMove ascript;
+  public FollowMouse bscript;
 
   //public GameObject GameManager;
   //private GameManager bool_script;
   
   void Start () {
-      ascript = GetComponent<SynchTest> ();
-      bscript = GetComponent<FollowMouseBlue> ();
+      ascript = GetComponent<PurpleDotMove> ();
+      bscript = GetComponent<FollowMouse> ();
       ascript.enabled = true;
       bscript.enabled = false;
 
