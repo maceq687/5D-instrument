@@ -2,6 +2,7 @@ mergeInto(LibraryManager.library, {
 
   SetVariables: function () {
     // set global variables and initial values
+    this.playing = 0;
     this.tempoBPM = 90; // set tempo in BPM
     this.rootMidiNote = 60; // set root note (MIDI number)
     this.sequence = [3, 4, 2, 0, 9, 6, 5, 6, 4, 3, 1, 0];
@@ -75,14 +76,19 @@ mergeInto(LibraryManager.library, {
   },
   
   PlayAudio: function () {
-    this.context.resume();
-    this.tempoMS = 60000 / this.tempoBPM / 4;
-    this.trigger = setInterval(_SetPitch, this.tempoMS);
+    playing = ++playing;
+
+    if (playing === 1) {
+      this.context.resume();
+      this.tempoMS = 60000 / this.tempoBPM / 4;
+      this.trigger = setInterval(_SetPitch, this.tempoMS);
+    }
   },
 
   StopAudio: function () {
     clearInterval(this.trigger);
     // this.gainNode.gain.setValueAtTime(0.0, this.context.currentTime);
+    this.playing = 0;
   },
 
   SetPitch: function () {
