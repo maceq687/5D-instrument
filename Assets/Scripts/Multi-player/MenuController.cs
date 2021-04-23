@@ -72,8 +72,8 @@ public class MenuController : MonoBehaviour
     {
         PhotonNetwork.LoadLevel("trial");
         string test = PhotonNetwork.AuthValues.UserId;
-        Debug.Log(test);
-        Debug.Log("test");
+        //Debug.Log(test);
+        //Debug.Log("test");
     }
 
 }

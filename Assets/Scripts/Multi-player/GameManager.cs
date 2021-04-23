@@ -8,61 +8,81 @@ public class GameManager : MonoBehaviour
     public GameObject PlayerPrefab;
     public GameObject Button;
     public GameObject SceneCamera;
+    // public PhotonView photonView;
 
-    public static Stack<Vector3> SeatsPosition = new Stack<Vector3>();
-    public static Stack<Quaternion> SeatsRotation = new Stack<Quaternion>();
+    // public bool SeatOneOccupation;
+    // public bool SeatTwoOccupation;
+    // public bool SeatThreeOccupation;
+    // public bool SeatFourOccupation;
+    // public bool SeatFiveOccupation;
+
+
+    Vector3[] list1 = new Vector3[5] {new Vector3(0, 0, 0), new Vector3( 185, 0, 130), new Vector3( -185, 0, 130), new Vector3( 116, 0, 355), new Vector3( -116, 0, 355)};
+    Quaternion[] list2 = new Quaternion[5] {(Quaternion.identity), Quaternion.Euler(0, -73, 0), Quaternion.Euler(0, 73, 0), Quaternion.Euler(0, -144, 0), Quaternion.Euler(0, 144, 0)};
 
     private void Awake()
     {
-        SeatsPosition.Push(new Vector3( -116, 0, 355)); //0
-        SeatsPosition.Push(new Vector3( 116, 0, 355)); //1
-        SeatsPosition.Push(new Vector3( -185, 0, 130)); //2
-        SeatsPosition.Push(new Vector3( 185, 0, 130)); //3
-        SeatsPosition.Push(new Vector3(0, 0, 0)); //4
-
-        SeatsRotation.Push(Quaternion.Euler(0, 144, 0)); //0
-        SeatsRotation.Push(Quaternion.Euler(0, -144, 0)); //1
-        SeatsRotation.Push(Quaternion.Euler(0, 73, 0)); //2
-        SeatsRotation.Push(Quaternion.Euler(0, -73, 0)); //3
-        SeatsRotation.Push(Quaternion.identity); //4
-        
         Button.SetActive(true);
+        //PhotonNetwork.automaticallySyncScene = true; 
+        //photonView = GetComponent<PhotonView>();
     }
+
     public void SpawnPlayer()
     {
-        PhotonNetwork.automaticallySyncScene = true;
-        // Debug.Log( SeatsPosition.Peek());
-        // Debug.Log( SeatsRotation.Peek());
-
-        PhotonNetwork.Instantiate(PlayerPrefab.name, SeatsPosition.Peek(), SeatsRotation.Peek(), 0);
-
-        string PlayerId = PhotonNetwork.AuthValues.UserId;
-        //Debug.Log(PlayerId);
-
-        SeatsPosition.Pop();
-        SeatsRotation.Pop();
-
-        Button.SetActive(false);
-        SceneCamera.SetActive(false);
-
-    }
-
-    public void Update(){
-
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (PhotonNetwork.countOfPlayers == 1)
         {
-            PhotonNetwork.DestroyPlayerObjects(PhotonNetwork.player);
-            PhotonNetwork.LeaveRoom();
-            //PhotonNetwork.LoadLevel(0);
+            PhotonNetwork.Instantiate(PlayerPrefab.name, list1[0], list2[0], 0);
 
-            //SeatsPosition.Push();
-            //SeatsRotation.Push();
+            // SeatOneOccupation = true;
+            // Debug.Log("SeatPilot");
+
+            Button.SetActive(false);
+            SceneCamera.SetActive(false);
         }
-    }
 
-    public void leaveRoom()
-    {
-     Debug.Log("IMOUTBITCHEZ");
+        else if (PhotonNetwork.countOfPlayers == 2)
+        {
+            PhotonNetwork.Instantiate(PlayerPrefab.name, list1[1], list2[1], 0);
+                    
+            // SeatTwoOccupation = true;
+            // Debug.Log("Seat2");
+
+            Button.SetActive(false);
+            SceneCamera.SetActive(false);
+        }
+
+        else if (PhotonNetwork.countOfPlayers == 3)
+        {
+            PhotonNetwork.Instantiate(PlayerPrefab.name, list1[2], list2[2], 0);
+                    
+            // SeatThreeOccupation = true;
+            // Debug.Log("Seat3");
+
+            Button.SetActive(false);
+            SceneCamera.SetActive(false);
+        }
+
+        else if (PhotonNetwork.countOfPlayers == 4)
+        {
+            PhotonNetwork.Instantiate(PlayerPrefab.name, list1[3], list2[3], 0);
+                    
+            // SeatFourOccupation = true;
+            // Debug.Log("Seat4");
+
+            Button.SetActive(false);
+            SceneCamera.SetActive(false);
+        }
+
+        else 
+        {
+            PhotonNetwork.Instantiate(PlayerPrefab.name, list1[4], list2[4], 0);
+
+            // Debug.Log("Seat5");
+
+            Button.SetActive(false);
+            SceneCamera.SetActive(false);
+        }
+        
     }
 }
  
