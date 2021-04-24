@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MovementManager : MonoBehaviour
 {
-  public DotMovement ascript;
+  public FollowMouse ascript;
   //public FollowMouseBlue bscript;
   public FollowCV bscript;
 
@@ -12,7 +12,7 @@ public class MovementManager : MonoBehaviour
   //private GameManager bool_script;
   
   void Start () {
-      ascript = GetComponent<DotMovement> ();
+      ascript = GetComponent<FollowMouse> ();
       //bscript = GetComponent<FollowMouseBlue> ();
       bscript = GetComponent<FollowCV> ();
       ascript.enabled = false;
