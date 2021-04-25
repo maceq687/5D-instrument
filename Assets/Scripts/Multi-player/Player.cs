@@ -12,8 +12,9 @@ public class Player : Photon.MonoBehaviour
     private static extern void ControlVideoStream(string name);
     public PhotonView photonView;
     public GameObject PlayerCamera;
+    public Camera UserCamera;
     bool FollowMouse = true;
-    public GameObject Bot;
+    private GameObject Bot;
     private Vector3 mouseToWorldPosition;
     private Vector3 handPosition;
     int seatNumber;
@@ -53,14 +54,14 @@ public class Player : Photon.MonoBehaviour
             if (FollowMouse == true)
             {   
                 MouseControl();
-                Bot.transform.position = Vector3.MoveTowards(Bot.transform.position, mouseToWorldPosition, 10);;
+                Bot.transform.localPosition = Vector3.MoveTowards(Bot.transform.localPosition, mouseToWorldPosition, 10);
             }
             else
             {   
                 // string test = "{\"xHand\":1,\"yHand\":0}";
                 // Debug.Log(test);
                 // CVControl(test);
-                Bot.transform.position = Vector3.MoveTowards(Bot.transform.position, handPosition, 10);;
+                Bot.transform.localPosition = Vector3.MoveTowards(Bot.transform.localPosition, handPosition, 10);
             }
             Debug.Log(Bot.transform.position);
         }
@@ -70,7 +71,7 @@ public class Player : Photon.MonoBehaviour
     {
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = 102;
-        mouseToWorldPosition = Camera.main.ScreenToWorldPoint(mousePos);
+        mouseToWorldPosition = UserCamera.ScreenToWorldPoint(mousePos);
         mouseToWorldPosition.x = Mathf.Clamp(mouseToWorldPosition.x, -42, 42);
         mouseToWorldPosition.y = Mathf.Clamp(mouseToWorldPosition.y, -42, 42);
     }

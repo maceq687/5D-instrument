@@ -4,6 +4,7 @@ mergeInto(LibraryManager.library, {
     // set global variables and initial values
     this.playing = 0;
     this.tempoBPM = 90; // set tempo in BPM
+    this.tempoMS = 60000 / this.tempoBPM / 4;
     this.rootMidiNote = 60; // set root note (MIDI number)
     this.sequence = [3, 4, 2, 0, 9, 6, 5, 6, 4, 3, 1, 0];
     this.hasChange = false;
@@ -64,6 +65,7 @@ mergeInto(LibraryManager.library, {
     this.distortion.oversample = '4x';
     this.distortion.curve = _DistortionCurve(0);
     this.lfo.frequency.setValueAtTime(12, this.context.currentTime);
+    this.kick.frequency.setValueAtTime(55, this.context.currentTime);
     this.filter.type = 'lowpass';
     this.filter.frequency.setValueAtTime(5000, this.context.currentTime);
     this.gainOsc1tri.gain.setValueAtTime(0.1, this.context.currentTime);
@@ -73,6 +75,9 @@ mergeInto(LibraryManager.library, {
     this.gainLfo.gain.setValueAtTime(1, this.context.currentTime);
     this.gainDel.gain.setValueAtTime(0.5, this.context.currentTime);
     this.gainKick.gain.setValueAtTime(0.0, this.context.currentTime);
+    _SetParamC(64);
+    _SetParamD(64);
+    _SetParamI(64);
   },
   
   PlayAudio: function () {
@@ -80,7 +85,6 @@ mergeInto(LibraryManager.library, {
 
     if (playing === 1) {
       this.context.resume();
-      this.tempoMS = 60000 / this.tempoBPM / 4;
       this.trigger = setInterval(_SetPitch, this.tempoMS);
     }
   },

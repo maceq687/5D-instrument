@@ -148,7 +148,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   photonView: {fileID: 5029102741055872827}
   PlayerCamera: {fileID: 7405028211429450950}
-  IsGrounded: 0
+  UserCamera: {fileID: 7405028211429450947}
+  Bot: {fileID: 0}
 --- !u!114 &5029102741055872827
 MonoBehaviour:
   m_ObjectHideFlags: 0
