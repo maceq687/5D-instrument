@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
         Button.SetActive(false);
         SpawnInstructions();
         SceneCamera.SetActive(false);
-        Debug.Log("Seat number: " + ++seatNumber);
+        Debug.Log("Seat index: " + seatNumber);
     }
 
     void SpawnInstructions()

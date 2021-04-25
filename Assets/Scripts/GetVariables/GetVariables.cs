@@ -96,25 +96,25 @@ public class GetVariables : MonoBehaviour
             #endif
         }
 
-        if (xPink != xGreenOld) {
+        if (xGreen != xGreenOld) {
             #if UNITY_WEBGL && !UNITY_EDITOR
             SetParamG(xGreen);
             #endif
         }
 
-        if (yPink != yGreenOld) {
+        if (yGreen != yGreenOld) {
             #if UNITY_WEBGL && !UNITY_EDITOR
             SetParamH(yGreen);
             #endif
         }
 
-        if (xPink != xGreenOld) {
+        if (xOrange != xOrangeOld) {
             #if UNITY_WEBGL && !UNITY_EDITOR
             SetParamI(xOrange);
             #endif
         }
 
-        if (yPink != yGreenOld) {
+        if (yOrange != yOrangeOld) {
             #if UNITY_WEBGL && !UNITY_EDITOR
             SetParamJ(yOrange);
             #endif
@@ -126,9 +126,9 @@ public class GetVariables : MonoBehaviour
         yPurpleOld = yPurple;
         xPinkOld = xPink;
         yPinkOld = yPink;
-        xPinkOld = xGreen;
-        yPinkOld = yGreen;
-        xPinkOld = xOrange;
-        yPinkOld = yOrange;
+        xGreenOld = xGreen;
+        yGreenOld = yGreen;
+        xOrangeOld = xOrange;
+        yOrangeOld = yOrange;
     }
 }
