@@ -17,10 +17,34 @@ public class GetVariables : MonoBehaviour
     [DllImport("__Internal")]
     private static extern void SetParamD(float paramD);
 
+    [DllImport("__Internal")]
+    private static extern void SetParamE(float paramE);
+
+    [DllImport("__Internal")]
+    private static extern void SetParamF(float paramF);
+
+    [DllImport("__Internal")]
+    private static extern void SetParamG(float paramG);
+
+    [DllImport("__Internal")]
+    private static extern void SetParamH(float paramH);
+
+    [DllImport("__Internal")]
+    private static extern void SetParamI(float paramI);
+
+    [DllImport("__Internal")]
+    private static extern void SetParamJ(float paramJ);
+
     float xBlueOld;
     float yBlueOld;
     float xPurpleOld;
     float yPurpleOld;
+    float xPinkOld;
+    float yPinkOld;
+    float xGreenOld;
+    float yGreenOld;
+    float xOrangeOld;
+    float yOrangeOld;
 
     void Update()
     {
@@ -28,6 +52,12 @@ public class GetVariables : MonoBehaviour
         float yBlue = GameObject.Find("BotBlue").GetComponent<GetBlueVariables>().YBlue;
         float xPurple = GameObject.Find("BotPurple").GetComponent<GetPurpleVariables>().XPurple;
         float yPurple = GameObject.Find("BotPurple").GetComponent<GetPurpleVariables>().YPurple;
+        float xPink = GameObject.Find("BotPink").GetComponent<GetPinkVariables>().XPink;
+        float yPink = GameObject.Find("BotPink").GetComponent<GetPinkVariables>().YPink;
+        float xGreen = GameObject.Find("BotGreen").GetComponent<GetGreenVariables>().XGreen;
+        float yGreen = GameObject.Find("BotGreen").GetComponent<GetGreenVariables>().YGreen;
+        float xOrange = GameObject.Find("BotOrange").GetComponent<GetOrangeVariables>().XOrange;
+        float yOrange = GameObject.Find("BotOrange").GetComponent<GetOrangeVariables>().YOrange;
 
         if (xBlue != xBlueOld) {
             #if UNITY_WEBGL && !UNITY_EDITOR
@@ -54,9 +84,51 @@ public class GetVariables : MonoBehaviour
             #endif
         }
 
+        if (xPink != xPinkOld) {
+            #if UNITY_WEBGL && !UNITY_EDITOR
+            SetParamE(xPink);
+            #endif
+        }
+
+        if (yPink != yPinkOld) {
+            #if UNITY_WEBGL && !UNITY_EDITOR
+            SetParamF(yPink);
+            #endif
+        }
+
+        if (xPink != xGreenOld) {
+            #if UNITY_WEBGL && !UNITY_EDITOR
+            SetParamG(xGreen);
+            #endif
+        }
+
+        if (yPink != yGreenOld) {
+            #if UNITY_WEBGL && !UNITY_EDITOR
+            SetParamH(yGreen);
+            #endif
+        }
+
+        if (xPink != xGreenOld) {
+            #if UNITY_WEBGL && !UNITY_EDITOR
+            SetParamI(xOrange);
+            #endif
+        }
+
+        if (yPink != yGreenOld) {
+            #if UNITY_WEBGL && !UNITY_EDITOR
+            SetParamJ(yOrange);
+            #endif
+        }
+
         xBlueOld = xBlue;
         yBlueOld = yBlue;
         xPurpleOld = xPurple;
         yPurpleOld = yPurple;
+        xPinkOld = xPink;
+        yPinkOld = yPink;
+        xPinkOld = xGreen;
+        yPinkOld = yGreen;
+        xPinkOld = xOrange;
+        yPinkOld = yOrange;
     }
 }
