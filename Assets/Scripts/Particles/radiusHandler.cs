@@ -16,7 +16,7 @@ public class radiusHandler : MonoBehaviour
     }
 
     void Update(){
-        Bot = GameObject.Find("BotBlue");
+        Bot = GameObject.Find("BotPink");
         float botX = (Bot.transform.localPosition.x + 42) / 84;
         float botY = (Bot.transform.localPosition.y + 42) / 84;
         float mouseX = Mathf.Clamp(botX * 7.9F + 0.1F, 0.1F, 8);

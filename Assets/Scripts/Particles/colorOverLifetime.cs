@@ -17,12 +17,12 @@ public class colorOverLifetime : MonoBehaviour
 
     void Update()
     {
-        Bot = GameObject.Find("BotPink");
+        Bot = GameObject.Find("BotBlue");
         float botX = (Bot.transform.localPosition.x + 42) / 84;
         float botY = (Bot.transform.localPosition.y + 42) / 84;
 
-        float mouseX = Mathf.Clamp(Mathf.Round(botX * 255), 0, 255);
-        float mouseY = Mathf.Clamp(Mathf.Round(botY * 255), 0, 255);
+        float mouseX = Mathf.Clamp(botX, 0, 1);
+        float mouseY = Mathf.Clamp(botY, 0, 1);
 
         hSliderValueR = mouseX;
         hSliderValueB = mouseY;
