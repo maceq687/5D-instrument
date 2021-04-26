@@ -59,14 +59,14 @@ public class Player : Photon.MonoBehaviour
             if (FollowMouse == true)
             {   
                 MouseControl();
-                Bot.transform.localPosition = Vector3.MoveTowards(Bot.transform.localPosition, mouseToCameraPosition, 10);
+                Bot.transform.localPosition = mouseToCameraPosition;
             }
             else
             {   
                 // string test = "{\"xHand\":1,\"yHand\":0}"; // moves dot to top right corner
                 // Debug.Log(test);
                 // CVControl(test);
-                Bot.transform.localPosition = Vector3.MoveTowards(Bot.transform.localPosition, handPosition, 10);
+                Bot.transform.localPosition = handPosition;
             }
             // Debug.Log(Bot.transform.localPosition);
         }
