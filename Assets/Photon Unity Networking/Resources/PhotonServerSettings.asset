@@ -51,4 +51,5 @@ MonoBehaviour:
   - AssignedPositionOne
   - AssignedPositionThree
   - AssignedPositionTwo
+  - RpcChangePlayerName
   DisableAutoOpenWizard: 1

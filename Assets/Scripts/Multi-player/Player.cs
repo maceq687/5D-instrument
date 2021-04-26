@@ -15,7 +15,7 @@ public class Player : Photon.MonoBehaviour
     public Camera UserCamera;
     bool FollowMouse = true;
     private GameObject Bot;
-    private Vector3 mouseToWorldPosition;
+    private Vector3 mouseToCameraPosition;
     private Vector3 handPosition;
     int seatNumber;
 
@@ -24,17 +24,22 @@ public class Player : Photon.MonoBehaviour
         GameObject[] BotList = new GameObject[5] {GameObject.Find("BotBlue"), GameObject.Find("BotPurple"), GameObject.Find("BotPink"), GameObject.Find("BotGreen"), GameObject.Find("BotOrange")};
         seatNumber = PhotonNetwork.player.GetRoomIndex();
         //Debug.Log(seatNumber);
+        Bot = BotList[seatNumber];
+        //Debug.Log(Bot);
+        photonView = GetComponent<PhotonView>();
         if(photonView.isMine)
         {
             PlayerCamera.SetActive(true);
         }
-        Bot = BotList[seatNumber];
-        //Debug.Log(Bot);
     }
 
     void Start()
     {
-        transform.name = transform.name.Replace("(Clone)", seatNumber.ToString()).Trim();
+        if(photonView.isMine)
+        {
+            // photonView.RPC("RpcChangePlayerName", PhotonTargets.All, seatNumber);
+            transform.name = transform.name.Replace("(Clone)", seatNumber.ToString()).Trim();
+        }
     }
 
     private void Update()
@@ -45,7 +50,7 @@ public class Player : Photon.MonoBehaviour
             if (Input.GetKeyDown (KeyCode.Space))
             {
                 FollowMouse = !FollowMouse;
-                // triggering this will send object name and toggle the computer viosion on after first space press
+                // triggering this will send object name and toggle the computer vision on after first space press
                 #if UNITY_WEBGL && !UNITY_EDITOR
                 ControlVideoStream("Player" + seatNumber.ToString());
                 #endif
@@ -54,16 +59,16 @@ public class Player : Photon.MonoBehaviour
             if (FollowMouse == true)
             {   
                 MouseControl();
-                Bot.transform.localPosition = Vector3.MoveTowards(Bot.transform.localPosition, mouseToWorldPosition, 10);
+                Bot.transform.localPosition = Vector3.MoveTowards(Bot.transform.localPosition, mouseToCameraPosition, 10);
             }
             else
             {   
-                // string test = "{\"xHand\":1,\"yHand\":0}";
+                // string test = "{\"xHand\":1,\"yHand\":0}"; // moves dot to top right corner
                 // Debug.Log(test);
                 // CVControl(test);
                 Bot.transform.localPosition = Vector3.MoveTowards(Bot.transform.localPosition, handPosition, 10);
             }
-            Debug.Log(Bot.transform.position);
+            // Debug.Log(Bot.transform.localPosition);
         }
     }
 
@@ -71,9 +76,10 @@ public class Player : Photon.MonoBehaviour
     {
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = 102;
-        mouseToWorldPosition = UserCamera.ScreenToWorldPoint(mousePos);
-        mouseToWorldPosition.x = Mathf.Clamp(mouseToWorldPosition.x, -42, 42);
-        mouseToWorldPosition.y = Mathf.Clamp(mouseToWorldPosition.y, -42, 42);
+        Vector3 mouseToWorldPosition = UserCamera.ScreenToWorldPoint(mousePos);
+        mouseToCameraPosition = transform.InverseTransformPoint(mouseToWorldPosition);
+        mouseToCameraPosition.x = Mathf.Clamp(mouseToCameraPosition.x, -42, 42);
+        mouseToCameraPosition.y = Mathf.Clamp(mouseToCameraPosition.y, -42, 42);
     }
 
     public void CVControl(string args)
@@ -88,16 +94,11 @@ public class Player : Photon.MonoBehaviour
         float yFloat = (float)y;
         handPosition = new Vector3(xFloat, yFloat, 0);
     }
-    // [PunRPC]
-    // private void FlipTrue()
-    // {
-    //     sr.flipX=true;
-    // }
 
     // [PunRPC]
-    // private void FlipFalse()
+    // private void RpcChangePlayerName(int seat)
     // {
-    //     sr.flipX=false;
+    //     transform.name = transform.name.Replace("(Clone)", seat.ToString()).Trim();
     // }
 }
 

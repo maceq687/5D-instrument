@@ -1719,9 +1719,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1044257948}
   - component: {fileID: 1044257954}
+  - component: {fileID: 1044257949}
   - component: {fileID: 1044257956}
   - component: {fileID: 1044257955}
-  - component: {fileID: 1044257949}
   m_Layer: 0
   m_Name: BotOrange
   m_TagString: Untagged
