@@ -33,10 +33,22 @@ public class Player : Photon.MonoBehaviour
     void Start()
     {
         seatNumber = PhotonNetwork.player.GetRoomIndex();
-        Bot = GameObject.Find(BotList[seatNumber]);
+        // Bot = GameObject.Find(BotList[seatNumber]);
+        if (photonView.isMine)
+        {
+            // this.gameObject.GetComponent<PhotonView>().name = "Player" + seatNumber.ToString();
+            Bot = GameObject.Find(BotList[seatNumber]);
+            // Bot.name = Bot.name.Replace("Bot", BotList[seatNumber]);
+        }
+        else
+        {
+            int playerSeat = photonView.owner.GetRoomIndex();
+            this.gameObject.name = "Player" + playerSeat.ToString();
+            Debug.Log("Say hello to Player" + playerSeat.ToString());
+            Bot = GameObject.Find("Player" + playerSeat.ToString() + "/Bot");
+            Bot.name = Bot.name.Replace("Bot", BotList[playerSeat]);
+        }
         photonViewBot = Bot.GetComponent<PhotonView>();
-        string name = "Player";
-        // this.gameObject.GetComponent<PhotonView>().owner.name = name + seatNumber.ToString();
     }
 
     void Update()
@@ -49,7 +61,7 @@ public class Player : Photon.MonoBehaviour
                 FollowMouse = !FollowMouse;
                 // triggering this will send object name and toggle the computer vision on after first space press
                 #if UNITY_WEBGL && !UNITY_EDITOR
-                ControlVideoStream(BotList[seatNumber]);
+                ControlVideoStream(this.gameObject.name);
                 #endif
             }
 
@@ -68,7 +80,7 @@ public class Player : Photon.MonoBehaviour
             // Debug.Log(Bot.transform.localPosition);
         }
     }
-    
+
     private void MouseControl()
     {
         Vector3 mousePos = Input.mousePosition;
