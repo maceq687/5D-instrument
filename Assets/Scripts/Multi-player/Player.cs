@@ -11,9 +11,15 @@ public class Player : Photon.MonoBehaviour
     [DllImport("__Internal")]
     private static extern void ControlVideoStream(string name);
     public PhotonView photonView;
+    //public PhotonView BotphotonView;
     public GameObject PlayerCamera;
     public Camera UserCamera;
     bool FollowMouse = true;
+    public GameObject BotBlue;
+    public GameObject BotPurple;
+    public GameObject BotPink;
+    public GameObject BotGreen;
+    public GameObject BotOrange;
     private GameObject Bot;
     private Vector3 mouseToCameraPosition;
     private Vector3 handPosition;
@@ -21,15 +27,22 @@ public class Player : Photon.MonoBehaviour
 
     private void Awake()
     {
-        GameObject[] BotList = new GameObject[5] {GameObject.Find("BotBlue"), GameObject.Find("BotPurple"), GameObject.Find("BotPink"), GameObject.Find("BotGreen"), GameObject.Find("BotOrange")};
+        //GameObject[] BotList = new GameObject[5] {GameObject.Find("BotBlue"), GameObject.Find("BotPurple"), GameObject.Find("BotPink"), GameObject.Find("BotGreen"), GameObject.Find("BotOrange")};
         seatNumber = PhotonNetwork.player.GetRoomIndex();
         //Debug.Log(seatNumber);
-        Bot = BotList[seatNumber];
-        //Debug.Log(Bot);
-        photonView = GetComponent<PhotonView>();
+        //Bot = BotList[seatNumber];
+        //Debug.Log(BotList[seatNumber]);
+
+        //photonView = GetComponent<PhotonView>();
         if(photonView.isMine)
         {
+            GameObject[] BotList = new GameObject[5] {BotBlue, BotPurple, BotPink, BotGreen, BotOrange};
+            //Debug.Log(GameObject.Find("BotBlue"));
+            Bot = BotList[seatNumber];
+            //Debug.Log(BotList[seatNumber]);
             PlayerCamera.SetActive(true);
+            Bot.SetActive(true);
+            //photonView.RPC("RpcChangePlayerName", PhotonTargets.All);
         }
     }
 
@@ -44,6 +57,9 @@ public class Player : Photon.MonoBehaviour
 
     private void Update()
     {
+        // BotphotonView = GameObject.Find(Bot.ToString()).GetComponent<PhotonView>();
+        // BotphotonView.RPC("RpcChangePlayerName", PhotonTargets.All);
+        
         if(photonView.isMine)
         {
             // Debug.Log(FollowMouse);
@@ -80,6 +96,7 @@ public class Player : Photon.MonoBehaviour
         mouseToCameraPosition = transform.InverseTransformPoint(mouseToWorldPosition);
         mouseToCameraPosition.x = Mathf.Clamp(mouseToCameraPosition.x, -42, 42);
         mouseToCameraPosition.y = Mathf.Clamp(mouseToCameraPosition.y, -42, 42);
+        
     }
 
     public void CVControl(string args)
@@ -99,6 +116,12 @@ public class Player : Photon.MonoBehaviour
     // private void RpcChangePlayerName(int seat)
     // {
     //     transform.name = transform.name.Replace("(Clone)", seat.ToString()).Trim();
+    // }
+
+    // [PunRPC]
+    // private void RpcChangePlayerName()
+    // {
+    //     Bot.SetActive(true);
     // }
 }
 
