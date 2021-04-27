@@ -10,57 +10,38 @@ public class Player : Photon.MonoBehaviour
 {
     [DllImport("__Internal")]
     private static extern void ControlVideoStream(string name);
-    public PhotonView photonView;
-    //public PhotonView BotphotonView;
-    public GameObject PlayerCamera;
     public Camera UserCamera;
     bool FollowMouse = true;
-    public GameObject BotBlue;
-    public GameObject BotPurple;
-    public GameObject BotPink;
-    public GameObject BotGreen;
-    public GameObject BotOrange;
     private GameObject Bot;
     private Vector3 mouseToCameraPosition;
+    private Vector3 mouseToWorldPosition;
     private Vector3 handPosition;
     int seatNumber;
+    public PhotonView photonView;
+    public PhotonView photonViewBot;
+    public GameObject PlayerCamera;
+    String[] BotList = new String[5] {"BotBlue", "BotPurple", "BotPink", "BotGreen", "BotOrange"};
 
     private void Awake()
     {
-        //GameObject[] BotList = new GameObject[5] {GameObject.Find("BotBlue"), GameObject.Find("BotPurple"), GameObject.Find("BotPink"), GameObject.Find("BotGreen"), GameObject.Find("BotOrange")};
-        seatNumber = PhotonNetwork.player.GetRoomIndex();
-        //Debug.Log(seatNumber);
-        //Bot = BotList[seatNumber];
-        //Debug.Log(BotList[seatNumber]);
-
-        //photonView = GetComponent<PhotonView>();
         if(photonView.isMine)
         {
-            GameObject[] BotList = new GameObject[5] {BotBlue, BotPurple, BotPink, BotGreen, BotOrange};
-            //Debug.Log(GameObject.Find("BotBlue"));
-            Bot = BotList[seatNumber];
-            //Debug.Log(BotList[seatNumber]);
             PlayerCamera.SetActive(true);
-            Bot.SetActive(true);
-            //photonView.RPC("RpcChangePlayerName", PhotonTargets.All);
         }
     }
 
     void Start()
     {
-        if(photonView.isMine)
-        {
-            // photonView.RPC("RpcChangePlayerName", PhotonTargets.All, seatNumber);
-            transform.name = transform.name.Replace("(Clone)", seatNumber.ToString()).Trim();
-        }
+        seatNumber = PhotonNetwork.player.GetRoomIndex();
+        Bot = GameObject.Find(BotList[seatNumber]);
+        photonViewBot = Bot.GetComponent<PhotonView>();
+        string name = "Player";
+        // this.gameObject.GetComponent<PhotonView>().owner.name = name + seatNumber.ToString();
     }
 
-    private void Update()
+    void Update()
     {
-        // BotphotonView = GameObject.Find(Bot.ToString()).GetComponent<PhotonView>();
-        // BotphotonView.RPC("RpcChangePlayerName", PhotonTargets.All);
-        
-        if(photonView.isMine)
+        if(photonViewBot.isMine)
         {
             // Debug.Log(FollowMouse);
             if (Input.GetKeyDown (KeyCode.Space))
@@ -68,7 +49,7 @@ public class Player : Photon.MonoBehaviour
                 FollowMouse = !FollowMouse;
                 // triggering this will send object name and toggle the computer vision on after first space press
                 #if UNITY_WEBGL && !UNITY_EDITOR
-                ControlVideoStream("Player" + seatNumber.ToString());
+                ControlVideoStream(BotList[seatNumber]);
                 #endif
             }
 
@@ -87,12 +68,12 @@ public class Player : Photon.MonoBehaviour
             // Debug.Log(Bot.transform.localPosition);
         }
     }
-
+    
     private void MouseControl()
     {
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = 102;
-        Vector3 mouseToWorldPosition = UserCamera.ScreenToWorldPoint(mousePos);
+        mouseToWorldPosition = UserCamera.ScreenToWorldPoint(mousePos);
         mouseToCameraPosition = transform.InverseTransformPoint(mouseToWorldPosition);
         mouseToCameraPosition.x = Mathf.Clamp(mouseToCameraPosition.x, -42, 42);
         mouseToCameraPosition.y = Mathf.Clamp(mouseToCameraPosition.y, -42, 42);
@@ -112,17 +93,6 @@ public class Player : Photon.MonoBehaviour
         handPosition = new Vector3(xFloat, yFloat, 0);
     }
 
-    // [PunRPC]
-    // private void RpcChangePlayerName(int seat)
-    // {
-    //     transform.name = transform.name.Replace("(Clone)", seat.ToString()).Trim();
-    // }
-
-    // [PunRPC]
-    // private void RpcChangePlayerName()
-    // {
-    //     Bot.SetActive(true);
-    // }
 }
 
 [Serializable]
@@ -131,4 +101,3 @@ public class Coordinates
     public double xHand;
     public double yHand;
 }
-
