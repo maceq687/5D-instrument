@@ -35,29 +35,63 @@ public class GetVariables : MonoBehaviour
     [DllImport("__Internal")]
     private static extern void SetParamJ(float paramJ);
 
+    float xBlue;
+    float yBlue;
     float xBlueOld;
     float yBlueOld;
+    float xPurple;
+    float yPurple;
     float xPurpleOld;
     float yPurpleOld;
+    float xPink;
+    float yPink;
     float xPinkOld;
     float yPinkOld;
+    float xGreen;
+    float yGreen;
     float xGreenOld;
     float yGreenOld;
+    float xOrange;
+    float yOrange;
     float xOrangeOld;
     float yOrangeOld;
 
     void Update()
-    {
-        float xBlue = GameObject.Find("BotBlue").GetComponent<GetBlueVariables>().XBlue;
-        float yBlue = GameObject.Find("BotBlue").GetComponent<GetBlueVariables>().YBlue;
-        float xPurple = GameObject.Find("BotPurple").GetComponent<GetPurpleVariables>().XPurple;
-        float yPurple = GameObject.Find("BotPurple").GetComponent<GetPurpleVariables>().YPurple;
-        float xPink = GameObject.Find("BotPink").GetComponent<GetPinkVariables>().XPink;
-        float yPink = GameObject.Find("BotPink").GetComponent<GetPinkVariables>().YPink;
-        float xGreen = GameObject.Find("BotGreen").GetComponent<GetGreenVariables>().XGreen;
-        float yGreen = GameObject.Find("BotGreen").GetComponent<GetGreenVariables>().YGreen;
-        float xOrange = GameObject.Find("BotOrange").GetComponent<GetOrangeVariables>().XOrange;
-        float yOrange = GameObject.Find("BotOrange").GetComponent<GetOrangeVariables>().YOrange;
+    {   
+        if (GameObject.Find("BotBlue"))
+        {
+            GameObject Bot = GameObject.Find("BotBlue");
+            xBlue = ScaleBotVariable(Bot.transform.localPosition.x);
+            yBlue = ScaleBotVariable(Bot.transform.localPosition.y);
+        }
+
+        if (GameObject.Find("BotPurple"))
+        {
+            GameObject Bot = GameObject.Find("BotPurple");
+            xPurple = ScaleBotVariable(Bot.transform.localPosition.x);
+            yPurple = ScaleBotVariable(Bot.transform.localPosition.y);
+        }
+    
+        if (GameObject.Find("BotPink"))
+        {
+            GameObject Bot = GameObject.Find("BotPink");
+            xPink = ScaleBotVariable(Bot.transform.localPosition.x);
+            yPink = ScaleBotVariable(Bot.transform.localPosition.y);
+        }
+
+        if (GameObject.Find("BotGreen"))
+        {
+            GameObject Bot = GameObject.Find("BotGreen");
+            xGreen = ScaleBotVariable(Bot.transform.localPosition.x);
+            yGreen = ScaleBotVariable(Bot.transform.localPosition.y);
+        }
+
+        if (GameObject.Find("BotOrange"))
+        {
+            GameObject Bot = GameObject.Find("BotOrange");
+            xOrange = ScaleBotVariable(Bot.transform.localPosition.x);
+            yOrange = ScaleBotVariable(Bot.transform.localPosition.y);
+        }
 
         if (xBlue != xBlueOld) {
             #if UNITY_WEBGL && !UNITY_EDITOR
@@ -130,5 +164,12 @@ public class GetVariables : MonoBehaviour
         yGreenOld = yGreen;
         xOrangeOld = xOrange;
         yOrangeOld = yOrange;
+    }
+
+    float ScaleBotVariable(float var)
+    {
+        var = (var + 42) / 84;
+        var = Mathf.Clamp(Mathf.Round(var * 127), 0, 127);
+        return var;
     }
 }

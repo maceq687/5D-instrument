@@ -6,6 +6,8 @@ public class numberOfParticles : MonoBehaviour
     private ParticleSystem ps;
     private GameObject Bot;
     private float hSliderValue = 2.5F;
+    float botX;
+    float botY;
 
     void Start()
     {
@@ -14,13 +16,16 @@ public class numberOfParticles : MonoBehaviour
 
     void Update()
     {
-        Bot = GameObject.Find("BotOrange");
-        float botX = (Bot.transform.localPosition.x + 42) / 84;
-        float botY = (Bot.transform.localPosition.y + 42) / 84;
-        float mouseX = Mathf.Clamp(Mathf.Round(botX * 65 + 5), 5, 70);
-        float mouseY = Mathf.Clamp(Mathf.Round(botY * 127), 0, 127);
-
-        hSliderValue = mouseX;
+        if (GameObject.Find("BotOrange"))
+        {
+            Bot = GameObject.Find("BotOrange");
+            botX = (Bot.transform.localPosition.x + 42) / 84;
+            botY = (Bot.transform.localPosition.y + 42) / 84;
+            botX = Mathf.Clamp(Mathf.Round(botX * 65 + 5), 5, 70);
+            botY = Mathf.Clamp(Mathf.Round(botY * 127), 0, 127);
+        }
+        
+        hSliderValue = botX;
 
         if (hSliderValue < 200)
         {

@@ -9,6 +9,8 @@ public class colorOverLifetime : MonoBehaviour
     public float hSliderValueB = 0.0F;
     public float hSliderValueA = 1.0F;
     private GameObject Bot;
+    float botX;
+    float botY;
 
     void Start()
     {
@@ -17,15 +19,18 @@ public class colorOverLifetime : MonoBehaviour
 
     void Update()
     {
-        Bot = GameObject.Find("BotBlue");
-        float botX = (Bot.transform.localPosition.x + 42) / 84;
-        float botY = (Bot.transform.localPosition.y + 42) / 84;
+        if (GameObject.Find("BotPurple"))
+        {
+            Bot = GameObject.Find("BotPurple");
+            botX = (Bot.transform.localPosition.x + 42) / 84;
+            botY = (Bot.transform.localPosition.y + 42) / 84;
+            botX = Mathf.Clamp(botX, 0, 1);
+            botY = Mathf.Clamp(botY, 0, 1);
+        }
+        
 
-        float mouseX = Mathf.Clamp(botX, 0, 1);
-        float mouseY = Mathf.Clamp(botY, 0, 1);
-
-        hSliderValueR = mouseX;
-        hSliderValueB = mouseY;
+        hSliderValueR = botX;
+        hSliderValueB = botY;
 
         var col = ps.colorOverLifetime;
         col.enabled = true;
