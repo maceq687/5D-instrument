@@ -16,14 +16,14 @@ public class Player : Photon.MonoBehaviour
     private Vector3 mouseToCameraPosition;
     private Vector3 mouseToWorldPosition;
     private Vector3 handPosition;
-    int seatNumber;
-    public PhotonView photonView;
-    public PhotonView photonViewBot;
+    private PhotonView photonView;
+    private PhotonView photonViewBot;
     public GameObject PlayerCamera;
     String[] BotList = new String[5] {"BotBlue", "BotPurple", "BotPink", "BotGreen", "BotOrange"};
 
     private void Awake()
     {
+        photonView = GetComponent<PhotonView>();
         if(photonView.isMine)
         {
             PlayerCamera.SetActive(true);
@@ -32,16 +32,17 @@ public class Player : Photon.MonoBehaviour
 
     void Start()
     {
-        seatNumber = PhotonNetwork.player.GetRoomIndex();
-        // Bot = GameObject.Find(BotList[seatNumber]);
         if (photonView.isMine)
         {
-            // this.gameObject.GetComponent<PhotonView>().name = "Player" + seatNumber.ToString();
-            Bot = GameObject.Find(BotList[seatNumber]);
-            // Bot.name = Bot.name.Replace("Bot", BotList[seatNumber]);
+            // renaming player and bot prefabs that belong to the player
+            int seatNumber = PhotonNetwork.player.GetRoomIndex();
+            this.gameObject.name = "Player" + seatNumber.ToString();
+            Bot = GameObject.Find("Player" + seatNumber.ToString() + "/Bot");
+            Bot.name = Bot.name.Replace("Bot", BotList[seatNumber]);
         }
         else
         {
+            // renaming player and bot prefabs that belong to other players in the room
             int playerSeat = photonView.owner.GetRoomIndex();
             this.gameObject.name = "Player" + playerSeat.ToString();
             Debug.Log("Say hello to Player" + playerSeat.ToString());
@@ -55,7 +56,6 @@ public class Player : Photon.MonoBehaviour
     {
         if(photonViewBot.isMine)
         {
-            // Debug.Log(FollowMouse);
             if (Input.GetKeyDown (KeyCode.Space))
             {
                 FollowMouse = !FollowMouse;
