@@ -19,16 +19,16 @@ public class colorOverLifetime : MonoBehaviour
 
     void Update()
     {
-        if (GameObject.Find("BotPurple"))
+        if (GameObject.Find("BotPink"))
         {
-            Bot = GameObject.Find("BotPurple");
+            Bot = GameObject.Find("BotPink");
             botX = (Bot.transform.localPosition.x + 42) / 84;
             botY = (Bot.transform.localPosition.y + 42) / 84;
             botX = Mathf.Clamp(botX, 0, 1);
             botY = Mathf.Clamp(botY, 0, 1);
         }
         
-
+        //changes the color
         hSliderValueR = botX;
         hSliderValueB = botY;
 

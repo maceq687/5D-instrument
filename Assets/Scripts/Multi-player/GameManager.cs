@@ -19,6 +19,11 @@ public class GameManager : MonoBehaviour
     {
         
         Button.SetActive(true);
+        if (Input. GetKey ("return")) 
+        {
+            SpawnPlayer();
+            //PlayMusic();
+        }
         StartCoroutine(ActivationRoutine());
         PhotonNetwork.automaticallySyncScene = true; 
     }
@@ -27,6 +32,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input. GetKey ("escape")) {
         //PhotonNetwork.LoadLevel("MainMenu");
+        PhotonNetwork.LeaveRoom();
         Application.LoadLevel("MainMenu"); //not reconnecting to the lobby
         }
         if (Input. GetKey ("return")) {

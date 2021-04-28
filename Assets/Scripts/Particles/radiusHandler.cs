@@ -8,7 +8,9 @@ public class radiusHandler : MonoBehaviour
 {
     private ParticleSystem ps;
     private GameObject Bot;
-    public float radius = 0.01f;
+    private float radiusX = 0.01f;
+    private float radiusY = 0.01f;
+    private float meanRadius = 4f;
     float botX;
     float botY;
 
@@ -18,19 +20,22 @@ public class radiusHandler : MonoBehaviour
     }
 
     void Update(){
-        if (GameObject.Find("BotPink"))
+        if (GameObject.Find("BotBlue"))
         {
-            Bot = GameObject.Find("BotPink");
+            Bot = GameObject.Find("BotBlue");
             botX = (Bot.transform.localPosition.x + 42) / 84;
             botY = (Bot.transform.localPosition.y + 42) / 84;
             botX = Mathf.Clamp(botX * 7.9F + 0.1F, 0.1F, 8);
-            botY = Mathf.Clamp(Mathf.Round(botY * 127), 0, 127);
+            botY = Mathf.Clamp(botX * 7.9F + 0.1F, 0.1F, 8);
         }
         
-        radius = botX;
+        radiusX = botX;
+        radiusY = botY;
+
+        meanRadius = (radiusX + radiusY) /2;
     
         var shape = ps.shape;
-        shape.radius = radius;
+        shape.radius = meanRadius;
 
     }
 }

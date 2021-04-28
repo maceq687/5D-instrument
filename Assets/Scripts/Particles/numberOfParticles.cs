@@ -5,7 +5,9 @@ public class numberOfParticles : MonoBehaviour
 {
     private ParticleSystem ps;
     private GameObject Bot;
-    private float hSliderValue = 2.5F;
+    private float hSliderValueX = 2.5F;
+    private float hSliderValueY = 2.5F;
+    private float meanValue;
     float botX;
     float botY;
 
@@ -16,22 +18,26 @@ public class numberOfParticles : MonoBehaviour
 
     void Update()
     {
-        if (GameObject.Find("BotOrange"))
+        if (GameObject.Find("BotPurple"))
         {
-            Bot = GameObject.Find("BotOrange");
+            Bot = GameObject.Find("BotPurple");
             botX = (Bot.transform.localPosition.x + 42) / 84;
             botY = (Bot.transform.localPosition.y + 42) / 84;
             botX = Mathf.Clamp(Mathf.Round(botX * 65 + 5), 5, 70);
-            botY = Mathf.Clamp(Mathf.Round(botY * 127), 0, 127);
+            botY = Mathf.Clamp(Mathf.Round(botX * 65 + 5), 5, 70);
         }
         
-        hSliderValue = botX;
+        hSliderValueX = botX;
+        hSliderValueY = botY;
+        //changers the number of particles
+        meanValue = (hSliderValueX + hSliderValueY) /2;
 
-        if (hSliderValue < 200)
+        if (meanValue < 200)
         {
             var emission = ps.emission;
-            emission.rateOverTime = hSliderValue;
+            emission.rateOverTime = meanValue;
         }
+
 
     }
 

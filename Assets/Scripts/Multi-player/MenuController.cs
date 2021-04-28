@@ -7,6 +7,9 @@ public class MenuController : MonoBehaviour
 {
     [SerializeField] private string VersioName = "0.1";
     [SerializeField] private GameObject ConnectPanel;
+    public GameObject Button;
+    public GameObject Message;
+    private bool ApprovePlayerIn = false;
 
     
 
@@ -15,10 +18,31 @@ public class MenuController : MonoBehaviour
         PhotonNetwork.ConnectUsingSettings(VersioName);
     }
 
+    private void Update()
+    {
+        if (ApprovePlayerIn==true)
+        {
+            if (PhotonNetwork.countOfPlayers<6)
+            {
+               Message.SetActive(false);
+               Button.SetActive(true);
+                if (Input. GetKey ("return")) 
+                {
+                    JoinGame();
+                }
+            }
+            else
+            {
+                Message.SetActive(true);
+            }
+        }
+    } 
+
     private void OnConnectedToMaster()
     {
         PhotonNetwork.JoinLobby(TypedLobby.Default);
         Debug.Log("Connected");
+        ApprovePlayerIn = true;
     }
 
     public void CreateGame()
