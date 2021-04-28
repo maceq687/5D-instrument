@@ -12,7 +12,6 @@ public class MenuController : MonoBehaviour
     private bool ApprovePlayerIn = false;
 
     
-
     private void Awake()
     {
         PhotonNetwork.ConnectUsingSettings(VersioName);
@@ -24,9 +23,9 @@ public class MenuController : MonoBehaviour
         {
             if (PhotonNetwork.countOfPlayers<6)
             {
-               Message.SetActive(false);
-               Button.SetActive(true);
-                if (Input. GetKey ("return")) 
+                Message.SetActive(false);
+                Button.SetActive(true);
+                if (Input.GetKeyDown("return")) 
                 {
                     JoinGame();
                 }
@@ -63,13 +62,6 @@ public class MenuController : MonoBehaviour
     {
         PhotonNetwork.LoadLevel("trial");
         Debug.Log("Joined room");
-        // string userId = PhotonNetwork.AuthValues.UserId;
-        // Debug.Log("userId: " + userId);
     }
-
-    // public override void OnDisconnected(DisconnectedCause cause)
-    // {
-    //     Debug.Log("Disconnected for reason " + cause.ToSctring());
-    // }
 
 }

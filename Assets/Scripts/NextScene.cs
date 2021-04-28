@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NextScene : MonoBehaviour
 {
@@ -12,10 +13,10 @@ public class NextScene : MonoBehaviour
 
     private IEnumerator ActivationRoutine()
     {        
-        //Wait for 14 secs.
+        // Wait for 3 secs.
         yield return new WaitForSeconds(3);
  
-        //Turn My game object that is set to false(off) to True(on).
-        Application.LoadLevel("MainMenu");
+        // Application.LoadLevel("MainMenu");
+        SceneManager.LoadScene(1);
     }
 }

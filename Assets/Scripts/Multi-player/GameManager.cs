@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using ExitGames.UtilityScripts;
 using System;
 using System.Runtime.InteropServices;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,32 +13,48 @@ public class GameManager : MonoBehaviour
     public GameObject PlayerPrefab;
     public GameObject Button;
     public GameObject SceneCamera;
+    AudioControl audioManager;
+    bool isPlaying = false;
     Vector3[] list1 = new Vector3[5] {new Vector3(0, 0, 0), new Vector3( 185, 0, 130), new Vector3( -185, 0, 130), new Vector3( 116, 0, 355), new Vector3( -116, 0, 355)};
     Quaternion[] list2 = new Quaternion[5] {(Quaternion.identity), Quaternion.Euler(0, -73, 0), Quaternion.Euler(0, 73, 0), Quaternion.Euler(0, -144, 0), Quaternion.Euler(0, 144, 0)};
 
     void Awake()
     {
-        
         Button.SetActive(true);
-        if (Input. GetKey ("return")) 
-        {
-            SpawnPlayer();
-            //PlayMusic();
-        }
         StartCoroutine(ActivationRoutine());
         PhotonNetwork.automaticallySyncScene = true; 
     }
 
+    void Start()
+    {
+        audioManager = GameObject.FindObjectOfType(typeof(AudioControl)) as AudioControl;
+    }
+
     void Update()
     {
-        if (Input. GetKey ("escape")) {
-        //PhotonNetwork.LoadLevel("MainMenu");
-        PhotonNetwork.LeaveRoom();
-        Application.LoadLevel("MainMenu"); //not reconnecting to the lobby
+        if (Input.GetKeyDown("escape"))
+        {
+            audioManager.StopMusic();
+            PhotonNetwork.LeaveRoom();
+            // Application.LoadLevel("MainMenu");
+            SceneManager.LoadScene(1);
+        
         }
-        if (Input. GetKey ("return")) {
-        Instructions.SetActive(false);
+
+        if (Input.GetKeyDown("return") && isPlaying == false)
+        {
+            if (Instructions.activeSelf == true)
+            {
+                Instructions.SetActive(false);
+            }
+            else
+            {
+                isPlaying = true;
+                SpawnPlayer();
+                audioManager.PlayMusic();
+            }
         }
+
     }
 
     public void SpawnPlayer()
@@ -52,12 +69,10 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator ActivationRoutine()
      {        
-         //Wait for 14 secs.
-         yield return new WaitForSeconds(15);
+        // Wait for 14 secs.
+        yield return new WaitForSeconds(14);
  
-         //Turn My game object that is set to false(off) to True(on).
-         Instructions.SetActive(false);
- 
+        Instructions.SetActive(false);
      }
 }
  
