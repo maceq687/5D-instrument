@@ -286,8 +286,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UserCamera: {fileID: 7405028211429450947}
-  photonView: {fileID: 2451651198553545698}
-  photonViewBot: {fileID: 0}
   PlayerCamera: {fileID: 7405028211429450950}
 --- !u!114 &2451651198553545698
 MonoBehaviour:
@@ -356,7 +354,7 @@ Camera:
   m_GameObject: {fileID: 7405028211429450950}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2

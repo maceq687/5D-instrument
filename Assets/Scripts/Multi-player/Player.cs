@@ -80,7 +80,9 @@ public class Player : Photon.MonoBehaviour
                 // string test = "{\"xHand\":1,\"yHand\":0}"; // moves dot to top right corner
                 // Debug.Log(test);
                 // CVControl(test);
-                Bot.transform.localPosition = handPosition;
+                int speed = 40;
+                float step =  speed * Time.deltaTime; // calculate distance to move
+                Bot.transform.localPosition = Vector3.MoveTowards(Bot.transform.localPosition, handPosition, step);
             }
             // Debug.Log(Bot.transform.localPosition);
         }
@@ -103,10 +105,11 @@ public class Player : Photon.MonoBehaviour
         Coordinates cord = JsonUtility.FromJson<Coordinates>(args);
         double x = (double)cord.xHand;
         double y = (double)cord.yHand;
-        x = (x - 0.5) * 84;
-        y = (-y + 0.5) * 84;
-        float xFloat = (float)x;
-        float yFloat = (float)y;
+        // value bigger than 84 is used below because hand is not detected while it is on the edge of camera view
+        x = (x - 0.5) * 110;
+        y = (-y + 0.5) * 110;
+        float xFloat = Mathf.Clamp((float)x, -42, 42);
+        float yFloat = Mathf.Clamp((float)y, -42, 42);
         handPosition = new Vector3(xFloat, yFloat, 0);
     }
 
