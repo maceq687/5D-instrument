@@ -8,17 +8,30 @@ using System.Runtime.InteropServices;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject Instructions;
     public GameObject PlayerPrefab;
     public GameObject Button;
-    public GameObject Instructions;
     public GameObject SceneCamera;
     Vector3[] list1 = new Vector3[5] {new Vector3(0, 0, 0), new Vector3( 185, 0, 130), new Vector3( -185, 0, 130), new Vector3( 116, 0, 355), new Vector3( -116, 0, 355)};
     Quaternion[] list2 = new Quaternion[5] {(Quaternion.identity), Quaternion.Euler(0, -73, 0), Quaternion.Euler(0, 73, 0), Quaternion.Euler(0, -144, 0), Quaternion.Euler(0, 144, 0)};
 
     void Awake()
     {
+        
         Button.SetActive(true);
+        StartCoroutine(ActivationRoutine());
         PhotonNetwork.automaticallySyncScene = true; 
+    }
+
+    void Update()
+    {
+        if (Input. GetKey ("escape")) {
+        //PhotonNetwork.LoadLevel("MainMenu");
+        Application.LoadLevel("MainMenu"); //not reconnecting to the lobby
+        }
+        if (Input. GetKey ("return")) {
+        Instructions.SetActive(false);
+        }
     }
 
     public void SpawnPlayer()
@@ -27,27 +40,18 @@ public class GameManager : MonoBehaviour
         int seatNumber = PhotonNetwork.player.GetRoomIndex();
         PhotonNetwork.Instantiate(PlayerPrefab.name, list1[seatNumber], list2[seatNumber], 0);
         Button.SetActive(false);
-        SpawnInstructions();
         SceneCamera.SetActive(false);
         Debug.Log("I am Player" + seatNumber);
     }
 
-    void SpawnInstructions()
-    {
-        Instructions.SetActive(true);
-        StartCoroutine(ExampleCoroutine());
-        Instructions.SetActive(false);
-    }
-
-    IEnumerator ExampleCoroutine()
-    {
-        yield return new WaitForSeconds(5);
-    }
-
-    // void OnPhotonPlayerDisconnected(PhotonPlayer newPlayer)
-    // {
-    //     PhotonNetwork.DestroyPlayerObjects(PhotonNetwork.player);
-    //     PhotonNetwork.LeaveRoom();
-    // }
+    private IEnumerator ActivationRoutine()
+     {        
+         //Wait for 14 secs.
+         yield return new WaitForSeconds(15);
+ 
+         //Turn My game object that is set to false(off) to True(on).
+         Instructions.SetActive(false);
+ 
+     }
 }
  

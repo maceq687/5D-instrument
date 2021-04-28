@@ -8,6 +8,8 @@ public class MenuController : MonoBehaviour
     [SerializeField] private string VersioName = "0.1";
     [SerializeField] private GameObject ConnectPanel;
 
+    
+
     private void Awake()
     {
         PhotonNetwork.ConnectUsingSettings(VersioName);
