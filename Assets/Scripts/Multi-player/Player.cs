@@ -19,8 +19,9 @@ public class Player : Photon.MonoBehaviour
     private PhotonView photonView;
     private PhotonView photonViewBot;
     public GameObject PlayerCamera;
+    SpriteRenderer sprite;
     String[] BotList = new String[5] {"BotBlue", "BotPurple", "BotPink", "BotGreen", "BotOrange"};
-
+    Color[] colors = new Color[5] { new Color(0,1,1,1), new Color(1,0,1,1), new Color(1,0,0,1), new Color(0,1,0,1),  new Color(1,1,0,1)};
     private void Awake()
     {
         photonView = GetComponent<PhotonView>();
@@ -39,6 +40,8 @@ public class Player : Photon.MonoBehaviour
             this.gameObject.name = "Player" + seatNumber.ToString();
             Bot = GameObject.Find("Player" + seatNumber.ToString() + "/Bot");
             Bot.name = Bot.name.Replace("Bot", BotList[seatNumber]);
+            sprite = Bot.GetComponent<SpriteRenderer>();
+            sprite.color = colors[seatNumber];
         }
         else
         {
@@ -48,6 +51,8 @@ public class Player : Photon.MonoBehaviour
             Debug.Log("Say hello to Player" + playerSeat.ToString());
             Bot = GameObject.Find("Player" + playerSeat.ToString() + "/Bot");
             Bot.name = Bot.name.Replace("Bot", BotList[playerSeat]);
+            sprite = Bot.GetComponent<SpriteRenderer>();
+            sprite.color = colors[playerSeat];
         }
         photonViewBot = Bot.GetComponent<PhotonView>();
     }

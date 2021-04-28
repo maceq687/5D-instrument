@@ -52,4 +52,5 @@ MonoBehaviour:
   - AssignedPositionThree
   - AssignedPositionTwo
   - RpcChangePlayerName
+  - getdafname_RPC
   DisableAutoOpenWizard: 1
