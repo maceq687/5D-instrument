@@ -670,10 +670,10 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  cloudProjectId: 
+  cloudProjectId: 80d69316-6b38-47a7-aac1-bd3afda5f827
   framebufferDepthMemorylessMode: 0
-  projectName: 
-  organizationId: 
+  projectName: 5D instrument
+  organizationId: maceq687
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
