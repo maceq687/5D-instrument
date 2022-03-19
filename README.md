@@ -1,3 +1,5 @@
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)&nbsp;
+<img src="https://img.shields.io/badge/Unity-2019.4.11f1-blue.svg?style=flat-round" alt="Unity 2019.4.11f1">
 # 5D-instrument
 Gesture controlled instrument for collaborative music creation. Instrument is an online application that runs in browser. It is capable of tracking user's hand motion using a webcam.  
 It was made using Unity (WebGL, visuals, multiplayer(PUN)) and JavaScript (computer vision and Web Audio API)   
